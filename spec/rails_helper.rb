@@ -63,4 +63,6 @@ RSpec.configure do |config|
   config.color = true
   config.tty = true
   config.formatter = :documentation
+
+  config.include FactoryBot::Syntax::Methods
 end
