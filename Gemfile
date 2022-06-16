@@ -44,6 +44,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'pry-byebug', '~> 3.9'
   gem 'rspec-rails', github: 'rspec/rspec-rails', branch: '6-0-maintenance'
+  gem 'factory_bot_rails', '~> 6.2'
 end
 
 group :development do
