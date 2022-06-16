@@ -38,6 +38,7 @@ gem "bootsnap", require: false
 
 group :test do
   gem 'faker', '~> 2.21'
+  gem 'shoulda-matchers', '~> 5.1'
 end
 
 group :development, :test do
