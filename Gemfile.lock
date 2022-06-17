@@ -193,6 +193,8 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    strong_migrations (1.2.0)
+      activerecord (>= 5.2)
     strscan (3.0.3)
     thor (1.2.1)
     timeout (0.3.0)
@@ -224,6 +226,7 @@ DEPENDENCIES
   rspec-rails!
   shoulda-matchers (~> 5.1)
   sprockets-rails
+  strong_migrations (~> 1.2)
   tzinfo-data
   web-console
 
