@@ -9,4 +9,6 @@
 #
 class User < ApplicationRecord
   validates :name, presence: true
+
+  has_many :clock_ins
 end
