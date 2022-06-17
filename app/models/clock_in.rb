@@ -17,8 +17,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ClockIn < ApplicationRecord
-  self.ignored_columns = ["type"]
-
   belongs_to :user
 
   validates :category, inclusion: { in: %w(sleep wake_up), message: "%{value} is not a valid category" }
