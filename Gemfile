@@ -36,6 +36,8 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem 'strong_migrations', '~> 1.2'
+
 group :test do
   gem 'faker', '~> 2.21'
   gem 'shoulda-matchers', '~> 5.1'
