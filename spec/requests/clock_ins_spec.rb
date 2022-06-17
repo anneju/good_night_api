@@ -19,4 +19,28 @@ RSpec.describe 'ClockIns', type: :request do
       expect(json_response['clock_ins'].pluck('id')).to eq([clock_in_3.id, clock_in_2.id, clock_in_1.id])
     end
   end
+
+  describe 'POST /create' do
+    context 'when param is valid' do
+      let(:params) { { category: ['sleep', 'wake_up'].sample } }
+
+      it 'returns 201 status and create a clock_in record' do
+        expect do
+          post "/users/#{user.id}/clock_ins", params: {clock_in: params}
+        end.to change { ClockIn.count }.by(1)
+        expect(response.status).to eq(201)
+      end
+    end
+
+    context 'when param is not valid' do
+      let(:params) { { category: '' } }
+
+      it 'return 400 and display error message' do
+        post "/users/#{user.id}/clock_ins", params: {clock_in: params}
+
+        expect(response.status).to eq(400)
+        expect(json_response['errors']).to be_present
+      end
+    end
+  end
 end
