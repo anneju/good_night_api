@@ -3,7 +3,7 @@
 # Table name: clock_ins
 #
 #  id         :bigint           not null, primary key
-#  type       :text
+#  category   :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint           not null
@@ -19,12 +19,12 @@
 require 'rails_helper'
 
 RSpec.describe ClockIn, type: :model do
-  context "when type is neither sleep nor wake_up" do
-    let(:clock_in) { build(:clock_in, type: 'others') }
+  context "when category is neither sleep nor wake_up" do
+    let(:clock_in) { build(:clock_in, category: 'others') }
 
     it "returns false and error messages" do
       expect(clock_in.save).to be_falsy
-      expect(clock_in.errors.messages[:type]).to include('others is not a valid type')
+      expect(clock_in.errors.messages[:category]).to include('others is not a valid category')
     end
   end
 end

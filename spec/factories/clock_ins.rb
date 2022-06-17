@@ -3,7 +3,7 @@
 # Table name: clock_ins
 #
 #  id         :bigint           not null, primary key
-#  type       :text
+#  category   :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint           not null
@@ -19,14 +19,14 @@
 FactoryBot.define do
   factory :clock_in do
     user { create(:user) }
-    type { ['sleep', 'wake_up'].sample }
+    category { ['sleep', 'wake_up'].sample }
 
     trait :sleep do
-      type { 'sleep' }
+      category { 'sleep' }
     end
 
     trait :wake_up do
-      type { 'wake_up' }
+      category { 'wake_up' }
     end
   end
 end
