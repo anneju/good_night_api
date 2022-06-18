@@ -9,7 +9,7 @@ class RelationshipManager
 
   def process
     action = define_action(current_user: @current_user, target_user: @target_user)
-    send(@action)
+    send(action)
     @errors.blank?
   end
 
