@@ -10,5 +10,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { is_expected.to validate_presence_of(:name) }
+  context 'when user has many clock_ins' do
+    let(:user) { create(:user) }
+    before { create_list(:clock_in, 5, user: user) }
+
+    it 'destroy the users clock_ins when user is destroyed' do
+      expect { user.destroy }.to change { ClockIn.count }.by(-5)
+    end
+  end
 end
