@@ -15,6 +15,6 @@ class UsersController < ApplicationController
 
   def set_target_user
     @target_user = User.find_by(id: params[:target_user_id])
-    render json: { errors: 'target user not found' }, status: :not_found unless @target_user
+    render json: { error: 'target user not found' }, status: :not_found unless @target_user
   end
 end

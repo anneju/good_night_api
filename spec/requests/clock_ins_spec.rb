@@ -29,5 +29,14 @@ RSpec.describe 'ClockIns', type: :request do
         expect(response.status).to eq(201)
       end
     end
+
+    context 'when param is not valid' do
+      let(:invaild_user_id) { 0 }
+      it 'returns 201 status and create a clock_in record' do
+        post "/users/#{invaild_user_id}/clock_ins"
+        expect(response.status).not_to eq(201)
+        expect(json_response['error']).to be_present
+      end
+    end
   end
 end

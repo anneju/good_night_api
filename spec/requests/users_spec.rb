@@ -19,7 +19,7 @@ RSpec.describe 'Users', type: :request do
         post "/users/#{current_user.id}/touch_relationship/#{not_avaliable_user_id}"
 
         expect(response.status).not_to eq(200)
-        expect(json_response['errors']).to be_present
+        expect(json_response['error']).to be_present
       end
     end
   end
