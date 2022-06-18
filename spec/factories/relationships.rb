@@ -8,6 +8,10 @@
 #  followee_id :bigint
 #  follower_id :bigint
 #
+# Indexes
+#
+#  index_relationships_on_followee_id_and_follower_id  (followee_id,follower_id) UNIQUE
+#
 FactoryBot.define do
   factory :relationship do
     follower_id { create(:user).id }
