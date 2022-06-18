@@ -17,7 +17,18 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ClockIn < ApplicationRecord
+  SLEEP_CATEGORY = 'sleep'.freeze
+  WAKEUP_CATEGORY = 'wake_up'.freeze
+
   belongs_to :user
 
   validates :category, inclusion: { in: %w(sleep wake_up), message: "%{value} is not a valid category" }
+
+  before_validation :set_category, on: :create
+
+  private
+
+  def set_category
+    self.category = user.lastest_clock_in&.category == SLEEP_CATEGORY ? WAKEUP_CATEGORY : SLEEP_CATEGORY
+  end
 end
