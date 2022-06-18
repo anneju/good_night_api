@@ -27,8 +27,8 @@ RSpec.describe User, type: :model do
     describe '#followees' do
       context 'this user follows other users' do
         before do
-          create(:relationship, follower_id: this_user.id, followee_id: other_user_1.id)
-          create(:relationship, follower_id: this_user.id, followee_id: other_user_2.id)
+          create(:relationship, follower: this_user, followee: other_user_1)
+          create(:relationship, follower: this_user, followee: other_user_2)
         end
 
         it 'returns all followees' do
@@ -40,8 +40,8 @@ RSpec.describe User, type: :model do
     describe '#followers' do
       context 'this user followed by other users' do
         before do
-          create(:relationship, follower_id: other_user_1.id, followee_id: this_user.id)
-          create(:relationship, follower_id: other_user_2.id, followee_id: this_user.id)
+          create(:relationship, follower: other_user_1, followee: this_user)
+          create(:relationship, follower: other_user_2, followee: this_user)
         end
 
         it 'returns all followers' do
