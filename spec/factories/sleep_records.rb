@@ -20,9 +20,11 @@
 #
 FactoryBot.define do
   factory :sleep_record do
-    duration { 1 }
-    sleep_clock_in_id { "" }
-    wake_up_clock_in_id { "" }
-    user { nil }
+    before(:create) do |sr|
+      user = sr.user || create(:user)
+      sr.user = user
+      sr.sleep_clock_in = user.clock_ins.create(created_at: 10.minutes.ago)
+      sr.wake_up_clock_in = user.clock_ins.create(created_at: Time.now)
+    end
   end
 end

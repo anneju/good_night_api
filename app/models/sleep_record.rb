@@ -24,4 +24,12 @@ class SleepRecord < ApplicationRecord
   belongs_to :user
   belongs_to :sleep_clock_in, class_name: 'ClockIn', foreign_key: :sleep_clock_in_id
   belongs_to :wake_up_clock_in, class_name: 'ClockIn', foreign_key: :wake_up_clock_in_id
+
+  before_validation :calculation_duration, on: :create
+
+  private
+
+  def calculation_duration
+    self.duration = (wake_up_clock_in.created_at - sleep_clock_in.created_at).to_i
+  end
 end
