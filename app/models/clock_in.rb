@@ -26,8 +26,21 @@ class ClockIn < ApplicationRecord
   validates :category, inclusion: { in: %w(sleep wake_up), message: "%{value} is not a valid category" }
 
   before_validation :set_category, on: :create
+  after_commit :create_sleep_record, on: :create, if: :wake_up?
 
   private
+
+  def sleep?
+    self.category == SLEEP_CATEGORY
+  end
+
+  def wake_up?
+    self.category == WAKEUP_CATEGORY
+  end
+
+  def create_sleep_record
+    # To implement
+  end
 
   def set_category
     self.category = user.lastest_clock_in&.category == SLEEP_CATEGORY ? WAKEUP_CATEGORY : SLEEP_CATEGORY
