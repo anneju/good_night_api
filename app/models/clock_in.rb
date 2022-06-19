@@ -18,31 +18,30 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ClockIn < ApplicationRecord
-  SLEEP_CATEGORY = 'sleep'.freeze
-  WAKEUP_CATEGORY = 'wake_up'.freeze
+  SLEEP = 'sleep'.freeze
+  WAKEUP = 'wake_up'.freeze
+
+  scope :sleep, -> { where(category: SLEEP) }
+  scope :wake_up, -> { where(category: WAKEUP) }
 
   belongs_to :user
 
   validates :category, inclusion: { in: %w(sleep wake_up), message: "%{value} is not a valid category" }
 
   before_validation :set_category, on: :create
-  after_commit :create_sleep_record, on: :create, if: :wake_up?
+  after_commit -> { SleepRecordCreateWorker.perform_async(id) }, if: :wake_up?
 
   private
 
   def sleep?
-    self.category == SLEEP_CATEGORY
+    self.category == SLEEP
   end
 
   def wake_up?
-    self.category == WAKEUP_CATEGORY
-  end
-
-  def create_sleep_record
-    # To implement
+    self.category == WAKEUP
   end
 
   def set_category
-    self.category = user.lastest_clock_in&.category == SLEEP_CATEGORY ? WAKEUP_CATEGORY : SLEEP_CATEGORY
+    self.category = user.lastest_clock_in&.category == SLEEP ? WAKEUP : SLEEP
   end
 end
