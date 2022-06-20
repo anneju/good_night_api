@@ -22,6 +22,8 @@
 class SleepRecord < ApplicationRecord
   validates :duration, presence: true
 
+  scope :last_7_days, -> { where("sleep_records.created_at > ?", 7.days.ago) }
+
   belongs_to :user
   belongs_to :sleep_clock_in, class_name: 'ClockIn', foreign_key: :sleep_clock_in_id
   belongs_to :wake_up_clock_in, class_name: 'ClockIn', foreign_key: :wake_up_clock_in_id

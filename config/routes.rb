@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     resources :clock_ins, only: [:index, :create]
+    get 'followees_sleep_records' => 'users#followees_sleep_records'
     post 'touch_relationship/:target_user_id' => 'users#touch_relationship'
   end
 end
