@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_target_user
+  before_action :set_target_user, only: [:touch_relationship]
 
   def touch_relationship
     manager = RelationshipManager.new(current_user: @current_user, target_user: @target_user)
@@ -9,6 +9,15 @@ class UsersController < ApplicationController
     else
       render json: { errors: manager.errors }, status: :bad_request
     end
+  end
+
+  def followees_sleep_records
+    limit = params.fetch(:limit, 10)
+    offset = params.fetch(:offset, 0)
+
+    @sleep_records = SleepRecord.includes(:user).where(user: @current_user.followees).last_7_days.order(duration: :desc).limit(limit).offset(offset)
+
+    render "users/followees_sleep_records", status: :ok
   end
 
   private

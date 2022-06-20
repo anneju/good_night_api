@@ -20,32 +20,21 @@ RSpec.describe User, type: :model do
   end
 
   describe 'followship' do
-    let(:this_user) { create(:user) }
-    let(:other_user_1) { create(:user) }
-    let(:other_user_2) { create(:user) }
-
     describe '#followees' do
       context 'this user follows other users' do
-        before do
-          create(:relationship, follower: this_user, followee: other_user_1)
-          create(:relationship, follower: this_user, followee: other_user_2)
-        end
+        include_context 'when_current_user_is_following_other_users'
 
         it 'returns all followees' do
-          expect(this_user.followees.pluck(:id)).to match_array([other_user_1.id, other_user_2.id])
+          expect(current_user.followees.pluck(:id)).to match_array([other_user_1.id, other_user_2.id])
         end
       end
     end
 
     describe '#followers' do
       context 'this user followed by other users' do
-        before do
-          create(:relationship, follower: other_user_1, followee: this_user)
-          create(:relationship, follower: other_user_2, followee: this_user)
-        end
-
+        include_context 'when_current_user_is_followed_by_other_users'
         it 'returns all followers' do
-          expect(this_user.followers.pluck(:id)).to match_array([other_user_1.id, other_user_2.id])
+          expect(current_user.followers.pluck(:id)).to match_array([other_user_1.id, other_user_2.id])
         end
       end
     end

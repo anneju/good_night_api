@@ -24,8 +24,8 @@ FactoryBot.define do
     before(:create) do |sr|
       user = sr.user || create(:user)
       sr.user = user
-      sr.sleep_clock_in = user.clock_ins.create(created_at: 10.minutes.ago)
-      sr.wake_up_clock_in = user.clock_ins.create(created_at: Time.now)
+      sr.sleep_clock_in = user.clock_ins.create(created_at: Faker::Time.between(from: 4.days.ago, to: 3.days.ago))
+      sr.wake_up_clock_in = user.clock_ins.create(created_at: Faker::Time.between(from: 2.days.ago, to: 1.days.ago))
     end
   end
 end
