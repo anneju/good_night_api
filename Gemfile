@@ -38,6 +38,8 @@ gem "bootsnap", require: false
 
 gem 'strong_migrations', '~> 1.2'
 
+gem 'sidekiq', '~> 6.5', '>= 6.5.1'
+
 group :test do
   gem 'faker', '~> 2.21'
   gem 'shoulda-matchers', '~> 5.1'

@@ -50,4 +50,12 @@ RSpec.describe ClockIn, type: :model do
       end
     end
   end
+
+  context 'user create a wake_up clock_in' do
+    before { create(:clock_in, :sleep, user: user) }
+    it 'should call SleepRecordCreateWorker' do
+      expect(SleepRecordCreateWorker).to receive(:perform_async).once
+      user.clock_ins.create
+    end
+  end
 end
