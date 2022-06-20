@@ -12,7 +12,8 @@
 #
 # Indexes
 #
-#  index_sleep_records_on_user_id  (user_id)
+#  index_sleep_records_on_sleep_id_and_wake_up_id  (sleep_clock_in_id,wake_up_clock_in_id) UNIQUE
+#  index_sleep_records_on_user_id                  (user_id)
 #
 # Foreign Keys
 #

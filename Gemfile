@@ -39,7 +39,6 @@ gem "bootsnap", require: false
 gem 'strong_migrations', '~> 1.2'
 
 gem 'sidekiq', '~> 6.5', '>= 6.5.1'
-# gem 'redis', '~> 4.6'
 
 group :test do
   gem 'faker', '~> 2.21'
