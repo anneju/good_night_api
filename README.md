@@ -1,5 +1,3 @@
-# README
-
 This app enable you do the following features:
 
 1. Clock In operation, and return all clocked-in times, ordered by created time.
